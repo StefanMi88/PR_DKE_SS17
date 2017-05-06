@@ -38,15 +38,14 @@
       <property name="caretWidth" class="java.lang.Integer" />
     </properties>
   </component>
-  <component name="GradleLocalSettings">
-    <option name="modificationStamps">
-      <map>
-        <entry key="$PROJECT_DIR$/../../../Uni_Semester6/CE/UDDI-Client_exported" value="2957429132000" />
-        <entry key="$PROJECT_DIR$/../../../Uni_Semester6/CE/Übungsprojekt/CE-Bay" value="2968538462000" />
-      </map>
-    </option>
-    <option name="externalProjectsViewState">
-      <projects_view />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
