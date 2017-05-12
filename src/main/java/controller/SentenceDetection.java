@@ -15,7 +15,8 @@ public class SentenceDetection {
             InputStream inputStream = new FileInputStream("Ressources/en-sent.bin");
             SentenceModel model = new SentenceModel(inputStream);
 
-            String sentence = "Hey! This is a testing sentence! I'm curious to see if it works. Just run the file...";
+            String sentence = "Hey! This is a testing sentence! I'm curious to see if it works. Just run the file... "
+                    + "Robert, Manuel and Stefan are working on this project!";
 
             //Needed for splitting sentence
             SentenceDetectorME detector = new SentenceDetectorME(model);
