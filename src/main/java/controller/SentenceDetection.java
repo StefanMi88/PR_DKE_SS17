@@ -54,6 +54,7 @@ public class SentenceDetection {
                 System.out.println(s);
             }
 
+            //Print Named Entities
             System.out.println("\nFollowing entities were found in the given sentence: ");
             for(Span s: vocabSpans) {
                 System.out.println(s.toString() + " " + tokens[s.getStart()]);
