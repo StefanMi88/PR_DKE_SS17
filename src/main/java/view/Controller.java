@@ -1,8 +1,5 @@
 package view;
 
-
-import controller.SentenceDetection;
-
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -40,7 +37,7 @@ public class Controller{
 	}
 	
 	private void setOutputText(){
-		ArrayList<String> tokentxt = SentenceDetection.getTokenizedTxt(text);
+		ArrayList<String> tokentxt = controller.Controller.getTokenizedTxt(text);
 		for(String s : tokentxt){
 						
 			if(s.startsWith("<token>")){//token start found
@@ -66,7 +63,7 @@ public class Controller{
 	
 	public void linkClicked(String s) {
 		InfoOutput.getChildren().clear();
-		InfoOutput.getChildren().addAll(new Text("Link: ["+s+"] clicked"));
+		InfoOutput.getChildren().addAll(new Text(controller.Controller.getMeta(s)));
 	}
 	
 	}
