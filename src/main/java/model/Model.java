@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Model {
-	/*public HashMap<K, V> getMeta(ArrayList<String> list){
-		return null;
+	public String getMeta(String Token){
+		//TODO: implement me
+		return Token;
 	}
-	public boolean setmeta(HashMap<K, V> list){
+	public boolean setmeta(String Token, String Info){
+		//TODO: implement me
 		return false;
-	}*/
+	}
 }

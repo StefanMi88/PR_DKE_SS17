@@ -74,6 +74,7 @@ public class SentenceDetection {
             			 done=true;
             		 }
             	 }
+
             	 if(!done)tokentxt.add(s);
             	 else done=false;
             }
