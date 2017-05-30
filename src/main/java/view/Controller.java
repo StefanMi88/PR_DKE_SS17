@@ -45,7 +45,6 @@ public class Controller{
 				Hyperlink link = new Hyperlink(str);
 		    	link.setOnAction(new EventHandler<ActionEvent>() {
 
-					@Override
 					public void handle(ActionEvent event) {
 						System.out.println("Link with name: [" +str+"] was clicked");
 						linkClicked(str);
