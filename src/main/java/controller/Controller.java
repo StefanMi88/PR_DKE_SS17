@@ -15,7 +15,7 @@ public class Controller {
 	 */
 	public static String getMeta(String token){
 		//TODO: implement me!
-		return token;
+		return new Sparql().lookup(token);
 	}
 	
 	/**
