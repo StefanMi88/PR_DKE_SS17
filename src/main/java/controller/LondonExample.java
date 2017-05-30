@@ -3,6 +3,7 @@ package controller;
 import org.apache.jena.query.ParameterizedSparqlString;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFactory;
 import org.apache.jena.query.ResultSetFormatter;
@@ -12,19 +13,16 @@ import org.apache.jena.rdf.model.ResourceFactory;
 public class LondonExample {
     public static void main(String[] args) {
     	org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
-                ParameterizedSparqlString qs = new ParameterizedSparqlString( "" +
+                String qs = new String( " " +
                 "prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>\n" +
                 "\n" +
                 "select ?resource where {\n" +
-                "  ?resource rdfs:label ?label\n" +
+                "  ?resource rdfs:label \"London\"@en\n" +
                 "}" );
-
-        Literal london = ResourceFactory.createLangLiteral( "London", "en" );
-        qs.setParam( "label", london );
 
         System.out.println( qs );
 
-        QueryExecution exec = QueryExecutionFactory.sparqlService( "http://dbpedia.org/sparql", qs.asQuery() );
+        QueryExecution exec = QueryExecutionFactory.sparqlService( "http://dbpedia.org/sparql", QueryFactory.create(qs) );
 
         // Normally you'd just do results = exec.execSelect(), but I want to 
         // use this ResultSet twice, so I'm making a copy of it.  
@@ -37,6 +35,6 @@ public class LondonExample {
         }
 
         // A simpler way of printing the results.
-        ResultSetFormatter.out( results );
+        //ResultSetFormatter.out( results );
     }
 }
