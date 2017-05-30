@@ -38,7 +38,7 @@ import org.apache.jena.update.UpdateProcessor ;
 import org.apache.jena.update.UpdateRequest ;
 import org.apache.jena.util.FileManager;
 import org.apache.jena.vocabulary.RDFS;
-
+import org.apache.jena.query.ParameterizedSparqlString;
 
 public class TDBData {
 
@@ -52,13 +52,13 @@ public class TDBData {
         InputStream in = fm.open("data/data.nt");
         
         // query for specific output Robert
-        String queryString = 
+/*        String queryString = 
                 "PREFIX foaf: <http://xmlns.com/foaf/0.1/> " +
                 "SELECT ?name WHERE { " +
                 "    ?person foaf:mbox <mailto:O11din@example.org> . " +
                 "    ?person foaf:name ?name . " +
                 "}";
-            
+  */          
 
         Location location = Location.create ("target/TDB");
         Dataset dataset = TDBFactory.createDataset(location);

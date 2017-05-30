@@ -11,7 +11,8 @@ import org.apache.jena.rdf.model.ResourceFactory;
 
 public class LondonExample {
     public static void main(String[] args) {
-        ParameterizedSparqlString qs = new ParameterizedSparqlString( "" +
+    	org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
+                ParameterizedSparqlString qs = new ParameterizedSparqlString( "" +
                 "prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>\n" +
                 "\n" +
                 "select ?resource where {\n" +
