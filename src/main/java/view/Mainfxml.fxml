@@ -48,7 +48,7 @@
             </ScrollPane>
             <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="302.0">
                <content>
-                  <TextFlow fx:id="InfoOutput" prefHeight="200.0" prefWidth="284.0" />
+                  <TextFlow fx:id="InfoOutput" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="284.0" />
                </content>
             </ScrollPane>
          </children>
