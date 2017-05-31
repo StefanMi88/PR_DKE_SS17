@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -12,6 +13,7 @@ public class Controller {
 	 * Search for Metadata for a given token
 	 * @param token e.g. (without"") "Donald E. Knuth", "Oxford"
 	 * @return String of metadata(already formated?)
+	 * @throws IOException 
 	 */
 	public static String getMeta(String token){
 		//TODO: implement me!

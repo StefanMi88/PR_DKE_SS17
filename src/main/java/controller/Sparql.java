@@ -1,5 +1,12 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
@@ -28,12 +35,13 @@ public class Sparql {
         // use this ResultSet twice, so I'm making a copy of it.  
         ResultSet results = ResultSetFactory.copyResults( exec.execSelect() );
         
-        StringBuffer res = new StringBuffer();
+        ArrayList<String> res = new ArrayList<>();
         while ( results.hasNext() ) {
             // As RobV pointed out, don't use the `?` in the variable
             // name here. Use *just* the name of the variable.
-            res.append(results.next().get( "resource" ));
+            res.add(results.next().get( "resource" ).toString());
         }
+        
         return res.toString();
 	}
 }
