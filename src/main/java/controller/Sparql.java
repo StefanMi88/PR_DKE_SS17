@@ -7,6 +7,7 @@ import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFactory;
+import org.apache.jena.query.ResultSetFormatter;
 
 /*
  * Created by Robert
@@ -14,7 +15,7 @@ import org.apache.jena.query.ResultSetFactory;
 
 public class Sparql {
 
-	public String lookup(String Token){
+	public ArrayList<String> lookup(String Token){
 		String qs = new String( " " +
                 "prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>\n" +
                 "\n" +
@@ -36,7 +37,7 @@ public class Sparql {
             // name here. Use *just* the name of the variable.
             res.add(results.next().get( "resource" ).toString());
         }
-        
-        return res.toString();
+        ResultSetFormatter.out( results );
+        return res;
 	}
 }

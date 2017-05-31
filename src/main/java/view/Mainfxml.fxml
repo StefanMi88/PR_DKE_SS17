@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 *Created by Robert
 -->
 
-
+<?import javafx.scene.web.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -11,23 +12,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
    <children>
+      <Region />
       <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <center>
-            <TextArea fx:id="TextInput" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </center>
          <top>
             <HBox spacing="8.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#okButtonClicked" text="OK">
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#okButtonClicked" text="OK">
                      <tooltip>
                         <Tooltip text="Click to Compute Text" />
                      </tooltip>
                   </Button>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#cancleButtonClicked" text="Clear">
+                  <Button mnemonicParsing="false" onAction="#cancleButtonClicked" text="Clear" textAlignment="CENTER">
                      <tooltip>
                         <Tooltip text="Remove Text" />
                      </tooltip>
@@ -38,6 +35,9 @@
                </BorderPane.margin>
             </HBox>
          </top>
+         <center>
+            <TextArea fx:id="TextInput" prefHeight="147.0" prefWidth="603.0" promptText="Write/copy something here..." BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
          <children>

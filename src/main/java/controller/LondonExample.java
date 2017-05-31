@@ -5,6 +5,7 @@ import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFactory;
+import org.apache.jena.query.ResultSetFormatter;
 
 
 public class LondonExample {
@@ -12,6 +13,8 @@ public class LondonExample {
     	//org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
         String qs = new String( " " +
                 "prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                "PREFIX  dbpedia-owl: <http://dbpedia.org/ontology/>"+
+                "PREFIX  dbpedia: <http://dbpedia.org/resource/>"+
                 "\n" +
                 "select ?resource where {\n" +
                 "  ?resource rdfs:label \"Hawking\"@en\n" +
@@ -25,13 +28,13 @@ public class LondonExample {
         // use this ResultSet twice, so I'm making a copy of it.  
         ResultSet results = ResultSetFactory.copyResults( exec.execSelect() );
 
-        while ( results.hasNext() ) {
-            // As RobV pointed out, don't use the `?` in the variable
-            // name here. Use *just* the name of the variable.
-            System.out.println( results.next().get( "resource" ));
-        }
+//        while ( results.hasNext() ) {
+//            // As RobV pointed out, don't use the `?` in the variable
+//            // name here. Use *just* the name of the variable.
+//            System.out.println( results.next().get( "resource" ));
+//        }
 
         // A simpler way of printing the results.
-        //ResultSetFormatter.out( results );
+        ResultSetFormatter.out( results );
     }
 }

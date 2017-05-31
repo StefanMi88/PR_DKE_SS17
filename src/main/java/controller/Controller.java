@@ -15,7 +15,7 @@ public class Controller {
 	 * @return String of metadata(already formated?)
 	 * @throws IOException 
 	 */
-	public static String getMeta(String token){
+	public static ArrayList<String> getMeta(String token){
 		//TODO: implement me!
 		return new Sparql().lookup(token);
 	}

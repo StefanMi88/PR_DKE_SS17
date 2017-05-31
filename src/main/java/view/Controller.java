@@ -1,6 +1,11 @@
 package view;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +14,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
 /**
  * Created by Robert
  */
@@ -16,9 +22,16 @@ public class Controller{
 	@FXML TextFlow TextOutput;
 	@FXML TextFlow InfoOutput;
 	@FXML TextArea TextInput;
+	
 	private String text = new String();
 	private ArrayList<Hyperlink> links = new ArrayList<>();
+	private ArrayList<Hyperlink> infos = new ArrayList<>();
 	
+	@FXML
+	void initialize(){
+		InfoOutput.getChildren().add(new Text("InfoOutput: Links from the Textoutput."));
+		TextOutput.getChildren().add(new Text("TextOutput: Displays tokenized text."));
+	}
 	
 	public void okButtonClicked(){
 		if(TextInput.getText()!=null && !TextInput.getText().isEmpty()){
@@ -27,7 +40,7 @@ public class Controller{
 			setOutputText();
 			TextInput.clear();
 		}else{
-			System.out.println("no text in area");
+			TextInput.setText("Hey! This is a testing sentence from Linz! I'm curious to see if it works. Just run the file...\n Robert, Manuel and Steve are working on this project!");
 		}
 	}
 	public void cancleButtonClicked(){
@@ -62,7 +75,29 @@ public class Controller{
 	
 	public void linkClicked(String s) {
 		InfoOutput.getChildren().clear();
-		InfoOutput.getChildren().addAll(new Text(controller.Controller.getMeta(s)));
+		ArrayList<String> meta = controller.Controller.getMeta(s);
+		for(String ms:meta){
+			Hyperlink hyperlink = new Hyperlink(ms);
+			infos.add(hyperlink);
+			hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent event) {
+					if(Desktop.isDesktopSupported()){
+						try {
+							Desktop.getDesktop().browse(new URI(hyperlink.getText()));
+						} catch (IOException | URISyntaxException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}}
+					
+				}
+			});
+			InfoOutput.getChildren().add(hyperlink);
+		}
+		
+		
+		
 	}
 	
 	}

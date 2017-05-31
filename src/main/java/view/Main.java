@@ -18,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Mainfxml.fxml"));
-    	primaryStage.setTitle("Hello World!");
+    	primaryStage.setTitle("Semantic Tokenizer");
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.show();
         
