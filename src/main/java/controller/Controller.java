@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import model.Model;
+
 /*
  * Created by Robert
  */
@@ -12,12 +14,18 @@ public class Controller {
 	/**
 	 * Search for Metadata for a given token
 	 * @param token e.g. (without"") "Donald E. Knuth", "Oxford"
-	 * @return String of metadata(already formated?)
+	 * @return String list of metadata(already formated?)
 	 * @throws IOException 
 	 */
 	public static ArrayList<String> getMeta(String token){
-		//TODO: implement me!
-		return new Sparql().lookup(token);
+		ArrayList<String> res= model.Model.getMeta(token);
+		if(res == null||res.isEmpty()){
+			res=new Sparql().lookup(token);
+			model.Model.setmeta(token, res);
+		}
+			
+		
+		return res;
 	}
 	
 	/**

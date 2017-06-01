@@ -16,7 +16,7 @@ public class Model {
 	 * @param Token zb "Robert"
 	 * @return Info infos über robert" Robert (Person) leer blablablablab
 	 */
-	public ResultSet getMeta(String Token){
+	public static ArrayList<String> getMeta(String Token){
 		//TODO: implement me
 		return null;
 	}
@@ -24,10 +24,10 @@ public class Model {
 	/**
 	 * 
 	 * @param Token zb "Robert"
-	 * @param Info infos über robert" Robert (Person) leer blablablablab
+	 * @param res infos über robert" Robert (Person) leer blablablablab
 	 * @return true if successful
 	 */
-	public boolean setmeta(String Token, ResultSet Info){
+	public static boolean setmeta(String Token, ArrayList<String> res){
 		//TODO: implement me
 		return false;
 	}
