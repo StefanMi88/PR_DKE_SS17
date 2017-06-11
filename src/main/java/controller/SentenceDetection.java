@@ -8,8 +8,12 @@ import opennlp.tools.tokenize.SimpleTokenizer;
 import opennlp.tools.util.Span;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -25,8 +29,7 @@ public class SentenceDetection {
     		//Input -> find Entities
             String sentence;
             if(txt.isEmpty()){
-            	sentence = "Hey! This is a testing sentence from Linz! I'm curious to see if it works. Just run the file... It is 10:00am! "
-                        + "Robert, Manuel and Steve are working on this project!";
+            	sentence = Files.lines(Paths.get("Resources/sample.txt")).collect(Collectors.joining("\n"));
             }else{
             	sentence = txt;
             }
@@ -76,16 +79,27 @@ public class SentenceDetection {
         catch (IOException e) {
             System.out.println(e);
         }
-		
+    	//remove double entries from tokentxt
+    	tokentxt = removeDoubles(tokentxt); 	
 		return tokentxt;
     }
+
+	private ArrayList<String> removeDoubles(ArrayList<String> tokentxt) {
+		ArrayList<String> newList = new ArrayList<String>();
+		for (String s: tokentxt) {
+			if (!newList.contains(s)) {
+				newList.add(s);
+			}
+		}
+		return newList;
+	}
 
 	private Span[] checkVocab(Span[] vocabSpans, String[] tokens, TokenNameFinderModel vocabModel) {
 		//Retrieve Entities in Sentence
         NameFinderME vocabChecker = new NameFinderME(vocabModel);
         Span found[] = vocabChecker.find(tokens);
-        for (Span i: found) {
-        	System.out.println(i.toString());
+        for (Span s: found) {
+        	System.out.println(s.toString());
         }
         vocabSpans = ArrayUtils.addAll(vocabSpans, found); 
         return vocabSpans;
