@@ -17,8 +17,8 @@ public class Controller {
 	 * @return String list of metadata(already formated?)
 	 * @throws IOException 
 	 */
-	public static ArrayList<String> getMeta(String token){
-		ArrayList<String> res= model.Model.getMeta(token);
+	public static String getMeta(String token){
+		String res= model.Model.getMeta(token);
 		if(res == null||res.isEmpty()){
 			res=new Sparql().lookup(token);
 			model.Model.setmeta(token, res);

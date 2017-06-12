@@ -15,7 +15,7 @@ import org.apache.jena.query.ResultSetFormatter;
 
 public class Sparql {
 
-	public ArrayList<String> lookup(String Token){
+	public String lookup(String Token){
 		String qs = new String( " " +
                 "prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>\n" +
                 "\n" +
@@ -31,13 +31,13 @@ public class Sparql {
         // use this ResultSet twice, so I'm making a copy of it.  
         ResultSet results = ResultSetFactory.copyResults( exec.execSelect() );
         
-        ArrayList<String> res = new ArrayList<>();
+        StringBuffer res = new StringBuffer();
         while ( results.hasNext() ) {
             // As RobV pointed out, don't use the `?` in the variable
             // name here. Use *just* the name of the variable.
-            res.add(results.next().get( "resource" ).toString());
+            res.append(results.next().get( "resource" ).toString());
         }
         ResultSetFormatter.out( results );
-        return res;
+        return res.toString();
 	}
 }

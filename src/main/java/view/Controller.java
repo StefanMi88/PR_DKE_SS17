@@ -73,30 +73,12 @@ public class Controller{
 
 	
 	public void linkClicked(String s) {
-		InfoOutput.getChildren().clear();
-		ArrayList<String> meta = controller.Controller.getMeta(s);
-		for(String ms:meta){
-			Hyperlink hyperlink = new Hyperlink(ms);
-			infos.add(hyperlink);
-			hyperlink.setOnAction(new EventHandler<ActionEvent>() {
-				
-				@Override
-				public void handle(ActionEvent event) {
-					if(Desktop.isDesktopSupported()){
-						try {
-							Desktop.getDesktop().browse(new URI(hyperlink.getText()));
-						} catch (IOException | URISyntaxException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}}
-					
-				}
-			});
-			InfoOutput.getChildren().add(hyperlink);
+		
+		InfoOutput.getChildren().addAll(new Text(controller.Controller.getMeta(s)));
 		}
 		
 		
 		
 	}
 	
-	}
+	
