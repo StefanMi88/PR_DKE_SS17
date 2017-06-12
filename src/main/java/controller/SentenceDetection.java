@@ -61,24 +61,28 @@ public class SentenceDetection {
             }   
             
             int i = 0;
+            //Loop over all tokens
             while (i < tokens.length) {
+            	//search vocabSpans if it contains token
             	for (Span s: vocabSpans) {
-            		System.out.println("Run for" + s.toString());
             		if (i == s.getStart()) {
             			String toAdd = "";
             			for(int j = i; j < s.getEnd(); j++) {
-            				if (toAdd != "") toAdd = toAdd + " " + tokens[j];
-            				else toAdd = tokens[j];
+            				//append token to existing entity
+            				if (toAdd != "") {
+            					toAdd = toAdd + " " + tokens[j];
+            				} 
+            				//add first part in token
+            				else {
+            					toAdd = tokens[j];
+            				}
             				i++;
-            				System.out.println("For Loop: " + i);
             			}
             			tokentxt.add("<" + s.getType() + ">" + toAdd);
-            			System.out.println("<" + s.getType() + ">" + toAdd);
             		}
-            		else {
+            		else if(i < tokens.length) {
             			tokentxt.add(tokens[i]);
                     	i++;
-        				System.out.println("Else: " + i);
             		}
             	}
             	System.out.println(i);
@@ -92,7 +96,10 @@ public class SentenceDetection {
             System.out.println(e);
         }
     	//remove double entries from tokentxt
-    	tokentxt = removeDoubles(tokentxt); 	
+    	//tokentxt = removeDoubles(tokentxt); 	
+    	for (String s: tokentxt) {
+    		System.out.println(s);
+    	}
 		return tokentxt;
     }
 
