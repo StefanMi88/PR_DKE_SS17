@@ -58,33 +58,19 @@ public class SentenceDetection {
             for (InputStream iS: vocabs) {
             	TokenNameFinderModel vocabModel = new TokenNameFinderModel(iS);             
                 vocabSpans = checkVocab(vocabSpans, tokens, vocabModel);
-            }        
+            }   
             
-            /*boolean done=false;
-            for (String s: tokens) {
-            	 for(Span i: vocabSpans) {
-            		 if(s.equals(tokens[i.getStart()])){
-            			 tokentxt.add("<token>" + i.getStart());
-            			 done=true;
-            		 }
-            	 }
-
-            	 if(!done)tokentxt.add(s);
-            	 else done=false;
-            }
-            
-            for(Span i: vocabSpans) {
-            	tokentxt.add("<token>" + tokens[i.getStart()] + " " + tokens[i.getEnd()-1]);
-            }*/
             int i = 0;
-            while (i < tokens.length-1) {
+            while (i < tokens.length) {
             	for (Span s: vocabSpans) {
+            		System.out.println("Run for" + s.toString());
             		if (i == s.getStart()) {
             			String toAdd = "";
             			for(int j = i; j < s.getEnd(); j++) {
             				if (toAdd != "") toAdd = toAdd + " " + tokens[j];
             				else toAdd = tokens[j];
             				i++;
+            				System.out.println("For Loop: " + i);
             			}
             			tokentxt.add("<" + s.getType() + ">" + toAdd);
             			System.out.println("<" + s.getType() + ">" + toAdd);
@@ -92,8 +78,10 @@ public class SentenceDetection {
             		else {
             			tokentxt.add(tokens[i]);
                     	i++;
+        				System.out.println("Else: " + i);
             		}
             	}
+            	System.out.println(i);
             }
 
         }
