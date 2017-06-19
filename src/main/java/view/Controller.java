@@ -4,7 +4,10 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,14 +35,14 @@ public class Controller{
 		TextOutput.getChildren().add(new Text("TextOutput: Displays tokenized text."));
 	}
 	
-	public void okButtonClicked(){
+	public void okButtonClicked() throws IOException{
 		if(TextInput.getText()!=null && !TextInput.getText().isEmpty()){
 			TextOutput.getChildren().clear();
 			text = TextInput.getText();
 			setOutputText();
 			TextInput.clear();
 		}else{
-			TextInput.setText("Hey! This is a testing sentence from Linz! I'm curious to see if it works. Just run the file...\n Robert, Manuel and Steve are working on this project!");
+			TextInput.setText(Files.lines(Paths.get("Resources/sample.txt")).collect(Collectors.joining("\n")));
 		}
 	}
 	public void cancleButtonClicked(){
@@ -73,30 +76,10 @@ public class Controller{
 
 	
 	public void linkClicked(String s) {
-		InfoOutput.getChildren().clear();
-		ArrayList<String> meta = controller.Controller.getMeta(s);
-		for(String ms:meta){
-			Hyperlink hyperlink = new Hyperlink(ms);
-			infos.add(hyperlink);
-			hyperlink.setOnAction(new EventHandler<ActionEvent>() {
-				
-				@Override
-				public void handle(ActionEvent event) {
-					if(Desktop.isDesktopSupported()){
-						try {
-							Desktop.getDesktop().browse(new URI(hyperlink.getText()));
-						} catch (IOException | URISyntaxException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}}
-					
-				}
-			});
-			InfoOutput.getChildren().add(hyperlink);
+		
+		InfoOutput.getChildren().addAll(new Text(controller.Controller.getMeta(s)));
 		}
 		
 		
 		
-	}
-	
 	}
