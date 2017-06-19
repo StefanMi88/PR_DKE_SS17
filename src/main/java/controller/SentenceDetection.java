@@ -95,7 +95,7 @@ public class SentenceDetection {
         catch (IOException e) {
             System.out.println(e);
         }
-    	//remove double entries from tokentxt -
+    	//remove double entries from tokentxt
     	//tokentxt = removeDoubles(tokentxt); 	
     	for (String s: tokentxt) {
     		System.out.println(s);
