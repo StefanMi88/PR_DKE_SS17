@@ -5,7 +5,10 @@ import opennlp.tools.namefind.TokenNameFinderModel;
 import opennlp.tools.sentdetect.SentenceDetectorME;
 import opennlp.tools.sentdetect.SentenceModel;
 import opennlp.tools.tokenize.SimpleTokenizer;
+import opennlp.tools.tokenize.Tokenizer;
+import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.util.Span;
+import opennlp.tools.tokenize.TokenizerME;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -35,7 +38,9 @@ public class SentenceDetection {
             }
             
             //Tokenize sentence
-            SimpleTokenizer tokenizer = SimpleTokenizer.INSTANCE;
+            InputStream modelIn = new FileInputStream("Resources/en-token.bin");
+            TokenizerModel model = new TokenizerModel(modelIn);
+            TokenizerME tokenizer = new TokenizerME(model);
             String tokens[] = tokenizer.tokenize(sentence);
             
             //Array of entities
@@ -53,24 +58,35 @@ public class SentenceDetection {
             for (InputStream iS: vocabs) {
             	TokenNameFinderModel vocabModel = new TokenNameFinderModel(iS);             
                 vocabSpans = checkVocab(vocabSpans, tokens, vocabModel);
-            }        
+            }   
             
-            boolean done=false;
-            for (String s: tokens) {
-            	 for(Span i: vocabSpans) {
-            		 if(s.equals(tokens[i.getStart()])){
-            			 //System.out.println(i.toString());
-            			 //System.out.println(s);
-            			 tokentxt.add("<token>" + s);
-            			 done=true;
-            		 }
-            	 }
-
-            	 if(!done)tokentxt.add(s);
-            	 else done=false;
+            int i = 0;
+            //Loop over all tokens
+            while (i < tokens.length) {
+            	//search vocabSpans if it contains token
+            	for (Span s: vocabSpans) {
+            		if (i == s.getStart()) {
+            			String toAdd = "";
+            			for(int j = i; j < s.getEnd(); j++) {
+            				//append token to existing entity
+            				if (toAdd != "") {
+            					toAdd = toAdd + " " + tokens[j];
+            				} 
+            				//add first part in token
+            				else {
+            					toAdd = tokens[j];
+            				}
+            				i++;
+            			}
+            			tokentxt.add("<" + s.getType() + ">" + toAdd);
+            		}
+            		else if(i < tokens.length) {
+            			tokentxt.add(tokens[i]);
+                    	i++;
+            		}
+            	}
+            	System.out.println(i);
             }
-            
-
 
         }
         catch (FileNotFoundException e) {
@@ -80,7 +96,10 @@ public class SentenceDetection {
             System.out.println(e);
         }
     	//remove double entries from tokentxt
-    	tokentxt = removeDoubles(tokentxt); 	
+    	//tokentxt = removeDoubles(tokentxt); 	
+    	for (String s: tokentxt) {
+    		System.out.println(s);
+    	}
 		return tokentxt;
     }
 
@@ -97,10 +116,7 @@ public class SentenceDetection {
 	private Span[] checkVocab(Span[] vocabSpans, String[] tokens, TokenNameFinderModel vocabModel) {
 		//Retrieve Entities in Sentence
         NameFinderME vocabChecker = new NameFinderME(vocabModel);
-        Span found[] = vocabChecker.find(tokens);
-        for (Span s: found) {
-        	System.out.println(s.toString());
-        }
+        Span[] found = vocabChecker.find(tokens);       
         vocabSpans = ArrayUtils.addAll(vocabSpans, found); 
         return vocabSpans;
 	}
