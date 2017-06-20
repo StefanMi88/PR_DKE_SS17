@@ -55,7 +55,7 @@ public class TDBData {
             Iterator<Quad> iter = dataset.asDatasetGraph().find();
             while ( iter.hasNext() ) {
                 Quad quad = iter.next();
-            }
+                System.out.println(quad);            }
         } finally {
             dataset.end();
         }
