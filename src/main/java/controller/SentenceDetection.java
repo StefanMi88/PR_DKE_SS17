@@ -88,7 +88,8 @@ public class SentenceDetection {
             	}
             	//inc i if vocabSpans is empty
             	if (vocabSpans.length == 0) {
-            		i++;
+        			tokentxt.add(tokens[i]);
+                	i++;
             	}
             }
 

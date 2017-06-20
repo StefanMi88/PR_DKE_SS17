@@ -53,8 +53,7 @@ public class Controller{
 	
 	private void setOutputText(){
 		ArrayList<String> tokentxt = controller.Controller.getTokenizedTxt(text);
-		for(String s : tokentxt){
-						
+		for(String s : tokentxt){						
 			if(s.startsWith("<token>")){//token start found
 				final String str=s.replace("<token>", "");
 				Hyperlink link = new Hyperlink(str);
@@ -68,7 +67,8 @@ public class Controller{
 		    	links.add(link);
 				TextOutput.getChildren().add(link);
 				TextOutput.getChildren().add(new Text(" "));
-				}else{
+			}
+			else{
 				TextOutput.getChildren().add(new Text(s+" "));
 			}
 		}
