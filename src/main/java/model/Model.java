@@ -53,7 +53,7 @@ public class Model {
 	/**
 	 * 
 	 * @param Token zb "Robert"
-	 * @return Info infos über robert" Robert (Person) leer blablablablab
+	 * @return Info infos ï¿½ber robert" Robert (Person) leer blablablablab
 	 */
 	public static String getMeta(String Token){
 /*		String queryString = new String( " "
@@ -101,7 +101,7 @@ public class Model {
                     res.append(soln.get("abstrac"));
                     
                 }
-                if (res.toString().isEmpty()) return "nichts Nuetzliches gefunden!";
+                if (res.toString().isEmpty()) return "Sorry - No additional information was found " + queryString + "!";
                 return res.toString();
         	
             } finally {
@@ -115,7 +115,7 @@ public class Model {
 	/**
 	 * 
 	 * @param Token zb "Robert"
-	 * @param res infos über robert" Robert (Person) leer blablablablab
+	 * @param res infos ï¿½ber robert" Robert (Person) leer blablablablab
 	 * @return true if successful
 	 */
 	public static boolean setmeta(String Token, String res){
@@ -124,7 +124,7 @@ public class Model {
              dataset.begin(ReadWrite.WRITE);
         try {
         	
-        	//Einfügen in TDB 
+        	//Einfï¿½gen in TDB 
         	org.apache.jena.rdf.model.Model model = dataset.getDefaultModel();
         	final Property abstrac = model.createProperty("http://example.org/abstrac" );
         	final Property name = model.createProperty("http://example.org/name" );
