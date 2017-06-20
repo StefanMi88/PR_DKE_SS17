@@ -101,7 +101,6 @@ public class Model {
                     res.append(soln.get("abstrac"));
                     
                 }
-                if (res.toString().isEmpty()) return "Sorry - No additional information was found " + token + "!";
                 return res.toString();
         	
             } finally {

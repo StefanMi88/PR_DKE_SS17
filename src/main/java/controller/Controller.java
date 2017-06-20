@@ -21,10 +21,11 @@ public class Controller {
 		String res= model.Model.getMeta(token);
 		if(res == null||res.isEmpty()){
 			res=new Sparql().lookup(token);
-			model.Model.setmeta(token, res);
+		if (res != null && !res.toString().isEmpty())	model.Model.setmeta(token, res);
 		}
 			
-		
+        if (res.toString().isEmpty() || res == null) return "Sorry - No additional information was found " + token + "!";
+
 		return res;
 	}
 	
