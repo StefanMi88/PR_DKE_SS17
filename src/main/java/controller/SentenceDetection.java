@@ -2,20 +2,15 @@ package controller;
 
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
-import opennlp.tools.sentdetect.SentenceDetectorME;
-import opennlp.tools.sentdetect.SentenceModel;
-import opennlp.tools.tokenize.SimpleTokenizer;
-import opennlp.tools.tokenize.Tokenizer;
 import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.util.Span;
 import opennlp.tools.tokenize.TokenizerME;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -59,6 +54,12 @@ public class SentenceDetection {
             	TokenNameFinderModel vocabModel = new TokenNameFinderModel(iS);             
                 vocabSpans = checkVocab(vocabSpans, tokens, vocabModel);
             }   
+            for (String s: tokens) {
+            	System.out.println("Token: " + s);
+            }
+            for (Span s: vocabSpans) {
+            	System.out.println("Span: " + s);
+            }
             
             int i = 0;
             //Loop over all tokens
@@ -80,12 +81,15 @@ public class SentenceDetection {
             			}
             			tokentxt.add("<token>" + toAdd);
             		}
-            		else if(i < tokens.length) {
+            		else if(i <= tokens.length) {
             			tokentxt.add(tokens[i]);
                     	i++;
             		}
             	}
-            	System.out.println(i);
+            	//inc i if vocabSpans is empty
+            	if (vocabSpans.length == 0) {
+            		i++;
+            	}
             }
 
         }
@@ -103,7 +107,7 @@ public class SentenceDetection {
 		return tokentxt;
     }
 
-	private ArrayList<String> removeDoubles(ArrayList<String> tokentxt) {
+	/*private ArrayList<String> removeDoubles(ArrayList<String> tokentxt) {
 		ArrayList<String> newList = new ArrayList<String>();
 		for (String s: tokentxt) {
 			if (!newList.contains(s)) {
@@ -111,7 +115,7 @@ public class SentenceDetection {
 			}
 		}
 		return newList;
-	}
+	}*/
 
 	private Span[] checkVocab(Span[] vocabSpans, String[] tokens, TokenNameFinderModel vocabModel) {
 		//Retrieve Entities in Sentence
