@@ -54,12 +54,6 @@ public class SentenceDetection {
             	TokenNameFinderModel vocabModel = new TokenNameFinderModel(iS);             
                 vocabSpans = checkVocab(vocabSpans, tokens, vocabModel);
             }   
-            for (String s: tokens) {
-            	System.out.println("Token: " + s);
-            }
-            for (Span s: vocabSpans) {
-            	System.out.println("Span: " + s);
-            }
             
             int i = 0;
             //Loop over all tokens
@@ -122,7 +116,9 @@ public class SentenceDetection {
 		//Retrieve Entities in Sentence
         NameFinderME vocabChecker = new NameFinderME(vocabModel);
         Span[] found = vocabChecker.find(tokens);       
-        vocabSpans = ArrayUtils.addAll(vocabSpans, found); 
+        vocabSpans = ArrayUtils.addAll(vocabSpans, found);
+        //clear Data to improve performance
+        vocabChecker.clearAdaptiveData();
         return vocabSpans;
 	}
 }
