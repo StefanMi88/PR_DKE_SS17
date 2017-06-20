@@ -55,7 +55,7 @@ public class Model {
 	 * @param Token zb "Robert"
 	 * @return Info infos �ber robert" Robert (Person) leer blablablablab
 	 */
-	public static String getMeta(String Token){
+	public static String getMeta(String token){
 /*		String queryString = new String( " "
         		+ "prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>\n"
                 + "PREFIX dbo:     <http://dbpedia.org/ontology/>"
@@ -70,7 +70,7 @@ public class Model {
                 "SELECT * WHERE { " +
                 "    ?s ex:name ?name . " +
                 " ?s ex:abstrac ?abstrac " +
-                " FILTER regex(str(?name), \"" + Token + "\")" +
+                " FILTER regex(str(?name), \"" + token + "\")" +
                 "}";
 
 		Location location = Location.create ("target/TDB");
@@ -101,7 +101,7 @@ public class Model {
                     res.append(soln.get("abstrac"));
                     
                 }
-                if (res.toString().isEmpty()) return "Sorry - No additional information was found " + queryString + "!";
+                if (res.toString().isEmpty()) return "Sorry - No additional information was found " + token + "!";
                 return res.toString();
         	
             } finally {
