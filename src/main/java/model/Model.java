@@ -118,7 +118,7 @@ public class Model {
 	 * @param res infos �ber robert" Robert (Person) leer blablablablab
 	 * @return true if successful
 	 */
-	public static boolean setmeta(String Token, String res){
+	public static boolean setmeta(String token, String res){
         Location location = Location.create ("target/TDB");
         Dataset dataset = TDBFactory.createDataset(location);
              dataset.begin(ReadWrite.WRITE);
@@ -128,9 +128,9 @@ public class Model {
         	org.apache.jena.rdf.model.Model model = dataset.getDefaultModel();
         	final Property abstrac = model.createProperty("http://example.org/abstrac" );
         	final Property name = model.createProperty("http://example.org/name" );
-            model.createResource("http://example.org/" + Token)
+            model.createResource("http://example.org/" + token)
             .addProperty(abstrac, model.createResource("\"" + res + "\""))
-            .addProperty(name, model.createResource("\"" + Token + "\""));
+            .addProperty(name, model.createResource("\"" + token + "\""));
 
             dataset.commit();
         } catch (Exception e) {
