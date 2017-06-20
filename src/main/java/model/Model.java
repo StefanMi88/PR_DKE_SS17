@@ -101,6 +101,7 @@ public class Model {
                     res.append(soln.get("abstrac"));
                     
                 }
+                if (res.toString().isEmpty()) return "nichts Nuetzliches gefunden!";
                 return res.toString();
         	
             } finally {
