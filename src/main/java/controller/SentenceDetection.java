@@ -62,7 +62,7 @@ public class SentenceDetection {
             	for (Span s: vocabSpans) {
             		if (i == s.getStart()) {
             			String toAdd = "";
-            			for(int j = i; j < s.getEnd(); j++) {
+            			for(int j = i; j < s.getEnd()-1; j++) {
             				//append token to existing entity
             				if (toAdd != "") {
             					toAdd = toAdd + " " + tokens[j];
