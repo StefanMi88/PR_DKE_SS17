@@ -78,7 +78,7 @@ public class SentenceDetection {
             				}
             				i++;
             			}
-            			tokentxt.add("<" + s.getType() + ">" + toAdd);
+            			tokentxt.add("<token>" + toAdd);
             		}
             		else if(i < tokens.length) {
             			tokentxt.add(tokens[i]);

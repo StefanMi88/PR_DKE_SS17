@@ -19,6 +19,7 @@ public class Controller {
 	 */
 	public static String getMeta(String token){
 		String res= model.Model.getMeta(token);
+		System.out.println("ManuelTest" + res);
 		if(res == null||res.isEmpty()){
 			res=new Sparql().lookup(token);
 			model.Model.setmeta(token, res);
