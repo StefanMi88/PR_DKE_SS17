@@ -76,10 +76,7 @@ public class Controller{
 
 	
 	public void linkClicked(String s) {
-		
+		InfoOutput.getChildren().clear();
 		InfoOutput.getChildren().addAll(new Text(controller.Controller.getMeta(s)));
-		}
-		
-		
-		
 	}
+}
