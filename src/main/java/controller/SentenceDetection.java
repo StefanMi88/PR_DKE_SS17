@@ -86,7 +86,7 @@ public class SentenceDetection {
                     	i++;
             		}
             	}
-            	//inc i if vocabSpans is empty
+            	//increase i if vocabSpans is empty
             	if (vocabSpans.length == 0) {
             		i++;
             	}
