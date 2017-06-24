@@ -54,37 +54,45 @@ public class SentenceDetection {
             	TokenNameFinderModel vocabModel = new TokenNameFinderModel(iS);             
                 vocabSpans = checkVocab(vocabSpans, tokens, vocabModel);
             }   
-            
-            int i = 0;
             //Loop over all tokens
-            while (i < tokens.length) {
-            	//search vocabSpans if it contains token
-            	for (Span s: vocabSpans) {
-            		if (i == s.getStart()) {
-            			String toAdd = "";
-            			for(int j = i; j < s.getEnd()-1; j++) {
-            				//append token to existing entity
-            				if (toAdd != "") {
-            					toAdd = toAdd + " " + tokens[j];
-            				} 
-            				//add first part in token
-            				else {
-            					toAdd = tokens[j];
+            //tokens contains all tokens of sentence
+            //vocabSpans contains all entities
+            
+            //if text contains no known entities
+            if (vocabSpans.length == 0) {
+        		for (String s: tokens) {
+        			tokentxt.add(s);
+        		}
+        	}
+            //enter else branch if entities were found
+            else {
+                int i = 0;
+            	while (i < tokens.length) {
+            		boolean span = false;
+            		for (Span s: vocabSpans) {
+            			if (s.getStart() == i) {
+            				span = true;
+            				//wordCnt > 1
+            				if (s.getEnd() - s.getStart() != 1) {
+            					String toAdd = "";
+            					for (int j = i; j < s.getEnd(); j++) {
+            						if (toAdd=="") toAdd = tokens[i];
+            						else toAdd = toAdd + " " + tokens[i];
+            						i++;
+            					}
+            					tokentxt.add("<token>" + toAdd);
             				}
-            				i++;
+            				else {
+            					tokentxt.add("<token>" + tokens[i]);
+            					i++;
+            				}
             			}
-            			tokentxt.add("<token>" + toAdd);
             		}
-            		else if(i <= tokens.length) {
-            			tokentxt.add(tokens[i]);
-                    	i++;
+            		if (!span) {
+	            		tokentxt.add(tokens[i]);
+	            		i++;
             		}
-            	}
-            	//inc i if vocabSpans is empty
-            	if (vocabSpans.length == 0) {
-        			tokentxt.add(tokens[i]);
-                	i++;
-            	}
+	            }
             }
 
         }
